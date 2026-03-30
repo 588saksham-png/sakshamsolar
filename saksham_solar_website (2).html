@@ -1,0 +1,122 @@
+import React, { useState } from "react";
+
+export default function SakshamSolar() {
+  const env = (typeof import.meta !== "undefined" && import.meta.env) ? import.meta.env : {};
+
+  const phone = env.VITE_PHONE || "9131791271";
+  const email = env.VITE_EMAIL || "sakshamsolar588@gmail.com";
+  const whatsapp = env.VITE_WHATSAPP || "919131791271";
+
+  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const text = `Hello, I am ${form.name}%0A📞 Phone: ${form.phone}%0A💬 Message: ${form.message}`;
+    const url = `https://wa.me/${whatsapp}?text=${text}`;
+
+    window.open(url, "_blank");
+  };
+
+  return (
+    <div className="bg-white text-gray-900 font-sans">
+      <header className="text-center p-6 bg-gradient-to-r from-yellow-100 to-yellow-300">
+        <h1 className="text-4xl font-bold text-black">SAKSHAM SOLAR</h1>
+        <p className="mt-2">Powering Your Future with Solar Energy</p>
+      </header>
+
+      <section
+        className="text-center py-20 bg-cover bg-center text-white"
+        style={{ backgroundImage: "url('/SOL.jpeg')" }}
+      >
+        <h2 className="text-5xl font-bold">Luxury Solar Solutions</h2>
+        <p className="mt-4">Save Energy | Save Money | Save the Planet</p>
+        <button
+          onClick={() => document.getElementById("contact")?.scrollIntoView()}
+          className="mt-6 px-6 py-3 bg-yellow-400 text-black rounded-xl"
+        >
+          Get Inquiry
+        </button>
+      </section>
+
+      <section className="p-10 max-w-4xl mx-auto">
+        <h2 className="text-2xl text-yellow-600 mb-4">About Us</h2>
+        <p>
+          Embrace a brighter, more sustainable future with SAKSHAM SOLAR. We provide innovative solar solutions for homes and businesses in Karera.
+        </p>
+      </section>
+
+      <section className="p-10 max-w-4xl mx-auto bg-gray-100 rounded-xl">
+        <h2 className="text-2xl text-yellow-600 mb-4">Our Services</h2>
+        <ul className="space-y-2">
+          <li>Solar Panel Installation</li>
+          <li>Residential & Commercial Systems</li>
+          <li>Maintenance & Support</li>
+          <li className="font-bold">Subsidy up to ₹78,000</li>
+        </ul>
+      </section>
+
+      <section className="p-10 max-w-4xl mx-auto">
+        <h2 className="text-2xl text-yellow-600 mb-4">Our Work</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          <img src="/SOL.jpeg" className="rounded-xl" alt="Solar" />
+          <img src="/EARTH.jpeg" className="rounded-xl" alt="Ground" />
+          <img src="/EARTH 2.jpeg" className="rounded-xl" alt="Earthing" />
+        </div>
+      </section>
+
+      <section id="contact" className="p-10 max-w-4xl mx-auto bg-gray-100 rounded-xl">
+        <h2 className="text-2xl text-yellow-600 mb-4">Contact & Inquiry</h2>
+        <p>Phone: {phone}</p>
+        <p>Email: {email}</p>
+
+        <form className="mt-4 space-y-3" onSubmit={handleSubmit}>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full p-2 rounded border"
+            placeholder="Name"
+            required
+          />
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full p-2 rounded border"
+            placeholder="Phone"
+            required
+          />
+          <textarea
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            className="w-full p-2 rounded border"
+            placeholder="Message"
+            required
+          />
+          <button className="bg-yellow-400 px-4 py-2 text-black rounded">
+            Send on WhatsApp
+          </button>
+        </form>
+      </section>
+
+      <a
+        href={`https://wa.me/${whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg"
+      >
+        💬
+      </a>
+
+      <footer className="text-center p-5 bg-gray-200 mt-10">
+        <p>© 2026 SAKSHAM SOLAR</p>
+      </footer>
+    </div>
+  );
+}
